@@ -236,6 +236,9 @@
     "vsce:publish": "vsce publish patch -m '%s [skip ci]' && git push",
     "ovsx:publish": "ovsx publish",
     "publish": "npm run vsce:publish && npm run ovsx:publish",
+    "github:release": "export VERSION=$(node -p \"require('./package.json').version\") && git add -A && git commit -m \"Release v$VERSION\" || true && git push && npm run vscode:prepublish && npx vsce package && gh release create v$VERSION --title \"Release v$VERSION\" --notes \"Release v$VERSION\" && gh release upload v$VERSION vscode-jest-runner-$VERSION.vsix",
+    "github:release-draft": "export VERSION=$(node -p \"require('./package.json').version\") && git add -A && git commit -m \"Release v$VERSION\" || true && git push && npm run vscode:prepublish && npx vsce package && gh release create v$VERSION --title \"Release v$VERSION\" --notes \"Release v$VERSION\" --draft && gh release upload v$VERSION vscode-jest-runner-$VERSION.vsix",
+    "github:release-dry-run": "export VERSION=$(node -p \"require('./package.json').version\") && echo \"Would create release: v$VERSION\" && echo \"Would commit and push changes\" && echo \"Would build extension\" && echo \"Would package extension\" && echo \"Would create GitHub release with tag: v$VERSION\"",
     "eslint:fix": "eslint --cache --fix",
     "prettier": "prettier --write"
   },
