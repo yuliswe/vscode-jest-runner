@@ -2,7 +2,7 @@
   "name": "vscode-jest-runner",
   "displayName": "Jest Runner",
   "description": "Simple way to run or debug a single (or multiple) tests from context-menu",
-  "version": "0.4.82",
+  "version": "0.4.82-patch",
   "publisher": "firsttris",
   "author": "Tristan Teufel",
   "repository": {
@@ -236,6 +236,9 @@
     "vsce:publish": "vsce publish patch -m '%s [skip ci]' && git push",
     "ovsx:publish": "ovsx publish",
     "publish": "npm run vsce:publish && npm run ovsx:publish",
+    "github:release": "./scripts/release-github.sh",
+    "github:release-draft": "./scripts/release-github.sh --draft",
+    "github:release-dry-run": "./scripts/release-github.sh --dry-run",
     "eslint:fix": "eslint --cache --fix",
     "prettier": "prettier --write"
   },
