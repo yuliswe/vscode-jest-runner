@@ -139,20 +139,23 @@ echo -e "${GREEN}✅ Changes pushed to GitHub${NC}"
 
 # Create GitHub release
 echo -e "${BLUE}🎉 Creating GitHub release...${NC}"
-RELEASE_ARGS="v${VERSION} --title \"Release v${VERSION}\" --notes \"Release v${VERSION}\""
 
 if [ "$DRAFT_MODE" = true ]; then
-    RELEASE_ARGS="${RELEASE_ARGS} --draft"
     echo -e "${YELLOW}📋 Creating draft release...${NC}"
+    if gh release create "v${VERSION}" --title "Release v${VERSION}" --notes "Release v${VERSION}" --draft; then
+        echo -e "${GREEN}✅ GitHub release created${NC}"
+    else
+        echo -e "${RED}❌ Error: Failed to create GitHub release${NC}"
+        exit 1
+    fi
 else
     echo -e "${BLUE}🚀 Creating public release...${NC}"
-fi
-
-if gh release create $RELEASE_ARGS; then
-    echo -e "${GREEN}✅ GitHub release created${NC}"
-else
-    echo -e "${RED}❌ Error: Failed to create GitHub release${NC}"
-    exit 1
+    if gh release create "v${VERSION}" --title "Release v${VERSION}" --notes "Release v${VERSION}"; then
+        echo -e "${GREEN}✅ GitHub release created${NC}"
+    else
+        echo -e "${RED}❌ Error: Failed to create GitHub release${NC}"
+        exit 1
+    fi
 fi
 
 # Upload the package
