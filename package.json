@@ -230,7 +230,7 @@
   },
   "scripts": {
     "vscode:prepublish": "webpack --mode production",
-    "build": "webpack --mode development",
+    "build": "webpack --mode production && vsce package",
     "watch": "webpack --mode development --watch",
     "test": "jest .src/test",
     "vsce:publish": "vsce publish patch -m '%s [skip ci]' && git push",
